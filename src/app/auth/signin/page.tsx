@@ -14,11 +14,10 @@ import axios from "axios";
 export default function SignInPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
 
   const router = useRouter()
 
-  const { data, mutate, isPending } = useMutation({
+  const { mutate, isPending, error } = useMutation({
     mutationFn: async () => {
       const response = await axios.post("/api/login", {
         email: email,
@@ -51,7 +50,7 @@ export default function SignInPage() {
         <form className="space-y-4 p-4" onSubmit={handleSubmit}>
           <h1 className="text-3xl font-bold">Welcome to your Gradebook</h1>
           <h1 className="text-2xl font-bold">Sign in</h1>
-          {error && <p className="text-red-500">{error}</p>}
+          {error && <p className="text-red-500">{error.message}</p>}
           <Input
             type="email"
             name="email"
