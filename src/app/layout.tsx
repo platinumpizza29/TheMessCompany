@@ -3,6 +3,7 @@ import "~/styles/globals.css";
 import { GeistSans } from "geist/font/sans";
 import { type Metadata } from "next";
 import Provider from "~/util/provider";
+import { Toaster } from "~/components/ui/sonner";
 
 export const metadata: Metadata = {
   title: "TheMessCompany",
@@ -21,9 +22,8 @@ export default function RootLayout({
           defer
           src="https://cdn.jsdelivr.net/npm/ldrs/dist/auto/spiral.js"
         ></script>
-        <Provider>
-          {children}
-        </Provider>
+        <Provider>{children}</Provider>
+        <Toaster />
       </body>
     </html>
   );

@@ -1,5 +1,5 @@
 "use client";
-import { useQuery } from "@tanstack/react-query";
+import {useQuery} from "@tanstack/react-query";
 import { Button } from "../ui/button";
 import {
   Table,
@@ -12,8 +12,12 @@ import {
 } from "../ui/table";
 import axios from "axios";
 import { type Alltest, type AdminTable } from "~/types/Admintable";
+import {useRouter} from "next/navigation";
 
 export default function AdminTableComponent() {
+
+  const router = useRouter();
+
   // Type the useQuery hook with the AdminTable interface
   const { data, isLoading, isError } = useQuery<AdminTable>({
     queryKey: ["adminTable"],
@@ -22,6 +26,10 @@ export default function AdminTableComponent() {
       return response.data as AdminTable;
     },
   });
+
+  const handleAnalysis=(testId:number)=>{
+    router.push(`/admin/${testId}`);
+  }
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -52,11 +60,12 @@ export default function AdminTableComponent() {
               <TableCell>{test.student.schoolId}</TableCell>
               <TableCell>{test.testName}</TableCell>
               <TableCell className="text-right">
-                <Button variant="outline">View Analysis</Button>
+                <Button variant="outline" onClick={()=>handleAnalysis(test.id)}>View Analysis</Button>
               </TableCell>
             </TableRow>
           ))}
         </TableBody>
+
       </Table>
     </div>
   );

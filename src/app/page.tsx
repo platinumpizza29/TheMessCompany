@@ -3,12 +3,7 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { useEffect } from "react";
-import {
-  NavigationMenu,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  navigationMenuTriggerStyle,
-} from "~/components/ui/navigation-menu";
+
 export default function App() {
   useEffect(() => {
     if (localStorage.getItem("token") !== null) {
@@ -24,7 +19,7 @@ export default function App() {
     <div className="min-h-[100dvh]">
       <div className="flex flex-col place-content-center">
         <header className="flex h-14 items-center px-4 lg:px-6">
-          <a className="flex items-center justify-center" href="#" rel="ugc">
+          <Link className="flex items-center justify-center" href="#" rel="ugc">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
@@ -40,64 +35,50 @@ export default function App() {
               <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path>
             </svg>
             <span className="sr-only">Gradebook</span>
-          </a>
+          </Link>
           <nav className="ml-auto flex gap-4 sm:gap-6">
-            <NavigationMenu>
-              <NavigationMenuItem>
-                <Link href="/auth/signin" legacyBehavior passHref>
-                  <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                    Sign-In
-                  </NavigationMenuLink>
-                </Link>
-                <Link href="/auth/signup" legacyBehavior passHref>
-                  <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                    Sign-Up
-                  </NavigationMenuLink>
-                </Link>
-              </NavigationMenuItem>
-            </NavigationMenu>
-            {/* <a
+            <Link
               className="text-sm font-medium underline-offset-4 hover:underline"
               href="#"
               rel="ugc"
             >
               Features
-            </a>
-            <a
+            </Link>
+            <Link
               className="text-sm font-medium underline-offset-4 hover:underline"
               href="#"
               rel="ugc"
             >
               Testimonials
-            </a>
-            <a
+            </Link>
+            <Link
               className="text-sm font-medium underline-offset-4 hover:underline"
               href="#"
               rel="ugc"
             >
               About
-            </a>
-            <a
+            </Link>
+            <Link
               className="text-sm font-medium underline-offset-4 hover:underline"
               href="#"
               rel="ugc"
             >
               Contact
-            </a> 
-            <a
+            </Link>
+            <Link
               className="text-sm font-medium underline-offset-4 hover:underline"
               href="/auth/signin"
               rel="ugc"
             >
               Sign-In
-            </a>
-            <a
+            </Link>
+            <Link
               className="text-sm font-medium underline-offset-4 hover:underline"
               href="/auth/signup"
               rel="ugc"
             >
               Sign-Up
-            </a>*/}
+            </Link>
           </nav>
         </header>
         <main className="flex-1">
