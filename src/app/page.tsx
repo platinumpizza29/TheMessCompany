@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { redirect } from "next/navigation";
+import { useEffect } from "react";
 import {
   NavigationMenu,
   NavigationMenuItem,
@@ -9,13 +10,16 @@ import {
   navigationMenuTriggerStyle,
 } from "~/components/ui/navigation-menu";
 export default function App() {
-  if (localStorage.getItem("token") !== null) {
-    if (localStorage.getItem('user_token') === "STUDENT") {
-      return redirect("/home");
-    } else {
-      return redirect("/admin");
+  useEffect(() => {
+    if (localStorage.getItem("token") !== null) {
+      if (localStorage.getItem("user_token") === "STUDENT") {
+        return redirect("/home");
+      } else {
+        return redirect("/admin");
+      }
     }
-  }
+  }, []);
+
   return (
     <div className="min-h-[100dvh]">
       <div className="flex flex-col place-content-center">
