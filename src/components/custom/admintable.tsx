@@ -1,4 +1,6 @@
-import { Button } from "../ui/button"
+"use client";
+import { useQuery } from "@tanstack/react-query";
+import { Button } from "../ui/button";
 import {
   Table,
   TableBody,
@@ -7,13 +9,32 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "../ui/table"
+} from "../ui/table";
+import axios from "axios";
+import { type Alltest, type AdminTable } from "~/types/Admintable";
 
-export default function AdminTable() {
+export default function AdminTableComponent() {
+  // Type the useQuery hook with the AdminTable interface
+  const { data, isLoading, isError } = useQuery<AdminTable>({
+    queryKey: ["adminTable"],
+    queryFn: async () => {
+      const response = await axios.get("/api/admin");
+      return response.data as AdminTable;
+    },
+  });
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (isError) {
+    return <div>Error loading data</div>;
+  }
+
   return (
     <div className="mt-10">
       <Table>
-        <TableCaption>A list of your recent test.</TableCaption>
+        <TableCaption>A list of your recent tests.</TableCaption>
         <TableHeader>
           <TableRow>
             <TableHead className="w-[100px]">Id</TableHead>
@@ -24,18 +45,19 @@ export default function AdminTable() {
           </TableRow>
         </TableHeader>
         <TableBody>
-          <TableRow>
-            <TableCell className="font-medium">1</TableCell>
-            <TableCell>Samarth</TableCell>
-            <TableCell>Symbiosis</TableCell>
-            <TableCell>Depression Test</TableCell>
-            <TableCell className="text-right">
-              <Button>View Analysis</Button>
-            </TableCell>
-          </TableRow>
+          {data?.alltest.map((test: Alltest) => (
+            <TableRow key={test.id}>
+              <TableCell className="font-medium">{test.id}</TableCell>
+              <TableCell>{test.student.name}</TableCell>
+              <TableCell>{test.student.schoolId}</TableCell>
+              <TableCell>{test.testName}</TableCell>
+              <TableCell className="text-right">
+                <Button variant="outline">View Analysis</Button>
+              </TableCell>
+            </TableRow>
+          ))}
         </TableBody>
       </Table>
-
     </div>
-  )
+  );
 }

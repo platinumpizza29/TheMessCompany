@@ -4,41 +4,47 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
-import 'ldrs/bouncy'
+import "ldrs/bouncy";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 
-// Default values shown  
-
+// Default values shown
 
 export default function SignInPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const router = useRouter()
+  const router = useRouter();
+
+  // create a interface efor response with token as string and role as string
+  interface ResponseData {
+    token: string;
+    role: string;
+  }
 
   const { mutate, isPending, error } = useMutation({
     mutationFn: async () => {
       const response = await axios.post("/api/login", {
         email: email,
-        password: password
-      })
-      localStorage.setItem('token', response.data.token)
-      localStorage.setItem('user_role', response.data.role)
-      console.log("Login successful", response.data);
+        password: password,
+      });
+      const responseData = response.data as ResponseData;
+      localStorage.setItem("token", responseData.token);
+      localStorage.setItem("user_role", responseData.role);
+      console.log("Login successful", responseData);
       // Redirect to a different page or update UI as needed
-      if (response.data.role === "ADMIN") {
-        router.push('/admin')
+      if (responseData.role === "ADMIN") {
+        router.push("/admin");
       } else {
-        router.push('/home')
+        router.push("/home");
       }
-      return response.data
-    }
-  })
+      return responseData;
+    },
+  });
 
   const handleSubmit = async (event: { preventDefault: () => void }) => {
     event.preventDefault(); // Prevent default form submission
-    mutate()
+    mutate();
   };
 
   return (
@@ -65,7 +71,9 @@ export default function SignInPage() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <Button type="submit" disabled={isPending}>{isPending ? "Loading..." : "SignIn"}</Button>
+          <Button type="submit" disabled={isPending}>
+            {isPending ? "Loading..." : "SignIn"}
+          </Button>
         </form>
       </div>
     </div>
