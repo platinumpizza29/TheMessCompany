@@ -4,9 +4,9 @@ CREATE TYPE "Role" AS ENUM ('STUDENT', 'TEACHER', 'ADMIN');
 -- CreateTable
 CREATE TABLE "User" (
     "id" SERIAL NOT NULL,
-    "clerkId" TEXT NOT NULL,
     "name" TEXT NOT NULL,
     "email" TEXT NOT NULL,
+    "password" TEXT NOT NULL,
     "role" "Role" NOT NULL,
     "schoolId" INTEGER DEFAULT 0,
 
@@ -38,6 +38,7 @@ CREATE TABLE "Test" (
 CREATE TABLE "Analysis" (
     "id" SERIAL NOT NULL,
     "testId" INTEGER NOT NULL,
+    "studentId" INTEGER NOT NULL,
     "symptoms" TEXT[],
     "duration" TEXT NOT NULL,
     "severity" TEXT NOT NULL,
@@ -46,9 +47,6 @@ CREATE TABLE "Analysis" (
 
     CONSTRAINT "Analysis_pkey" PRIMARY KEY ("id")
 );
-
--- CreateIndex
-CREATE UNIQUE INDEX "User_clerkId_key" ON "User"("clerkId");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
@@ -61,6 +59,9 @@ ALTER TABLE "User" ADD CONSTRAINT "User_schoolId_fkey" FOREIGN KEY ("schoolId") 
 
 -- AddForeignKey
 ALTER TABLE "Test" ADD CONSTRAINT "Test_studentId_fkey" FOREIGN KEY ("studentId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Analysis" ADD CONSTRAINT "Analysis_studentId_fkey" FOREIGN KEY ("studentId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Analysis" ADD CONSTRAINT "Analysis_testId_fkey" FOREIGN KEY ("testId") REFERENCES "Test"("id") ON DELETE RESTRICT ON UPDATE CASCADE;

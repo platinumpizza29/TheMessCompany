@@ -3,14 +3,18 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { useEffect } from "react";
+import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar";
+import { Button } from "~/components/ui/button";
+import { Input } from "~/components/ui/input";
+import { Textarea } from "~/components/ui/textarea";
 
 export default function App() {
   useEffect(() => {
     if (localStorage.getItem("token") !== null) {
-      if (localStorage.getItem("user_token") === "STUDENT") {
-        return redirect("/home");
-      } else {
+      if (localStorage.getItem("user_token") === "ADMIN") {
         return redirect("/admin");
+      } else {
+        return redirect("/home");
       }
     }
   }, []);
@@ -87,7 +91,7 @@ export default function App() {
               <div className="flex flex-col items-center space-y-4 text-center">
                 <div className="space-y-2">
                   <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl/none">
-                    Ace Your Psychology Test with Our Gradebook
+                    Sorting the Mess in Life
                   </h1>
                   <p className="mx-auto max-w-[700px] text-muted-foreground md:text-xl">
                     Get real-time updates, detailed performance analysis, and
@@ -238,27 +242,100 @@ export default function App() {
               </div>
             </div>
           </section>
+          {/* Meet out team section */}
+
+          <section className="container mx-auto px-4 py-12">
+            <h1 className="mb-8 text-3xl font-bold">Meet the Team</h1>
+            <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-3">
+              <div className="rounded-lg bg-muted p-6 shadow-md">
+                <div className="mb-4 flex items-center">
+                  <Avatar>
+                    <AvatarImage src="/placeholder-user.jpg" alt="John Doe" />
+                    <AvatarFallback>JD</AvatarFallback>
+                  </Avatar>
+                  <div className="ml-4">
+                    <h3 className="text-lg font-semibold">Aryan Karsude</h3>
+                    <p className="text-muted-foreground">CEO</p>
+                  </div>
+                </div>
+                <p className="text-muted-foreground">
+                  John is the founder and CEO of Acme Inc. He has over 15 years
+                  of experience in the industry and is passionate about building
+                  innovative products.
+                </p>
+              </div>
+              <div className="rounded-lg bg-muted p-6 shadow-md">
+                <div className="mb-4 flex items-center">
+                  <Avatar>
+                    <AvatarImage src="/placeholder-user.jpg" alt="Jane Smith" />
+                    <AvatarFallback>JS</AvatarFallback>
+                  </Avatar>
+                  <div className="ml-4">
+                    <h3 className="text-lg font-semibold">Nivedita</h3>
+                    <p className="text-muted-foreground">COO</p>
+                  </div>
+                </div>
+                <p className="text-muted-foreground">
+                  Jane is the Chief Technology Officer at Acme Inc. She has a
+                  background in computer science and has been with the company
+                  since the beginning.
+                </p>
+              </div>
+              <div className="rounded-lg bg-muted p-6 shadow-md">
+                <div className="mb-4 flex items-center">
+                  <Avatar>
+                    <AvatarImage
+                      src="/placeholder-user.jpg"
+                      alt="Bob Johnson"
+                    />
+                    <AvatarFallback>BJ</AvatarFallback>
+                  </Avatar>
+                  <div className="ml-4">
+                    <h3 className="text-lg font-semibold">Keyur Bilgi</h3>
+                    <p className="text-muted-foreground">Head of Engineering</p>
+                  </div>
+                </div>
+                <p className="text-muted-foreground">
+                  Bob is the Head of Engineering at Acme Inc. He has over 10
+                  years of experience in software development and is responsible
+                  for leading the engineering team.
+                </p>
+              </div>
+            </div>
+          </section>
         </main>
-        <footer className="flex w-full shrink-0 flex-col items-center gap-2 border-t px-4 py-6 sm:flex-row md:px-6">
-          <p className="text-xs text-muted-foreground">
-            © 2024 Gradebook. All rights reserved.
-          </p>
-          <nav className="flex gap-4 sm:ml-auto sm:gap-6">
-            <a
-              className="text-xs underline-offset-4 hover:underline"
-              href="#"
-              rel="ugc"
-            >
-              Terms of Service
-            </a>
-            <a
-              className="text-xs underline-offset-4 hover:underline"
-              href="#"
-              rel="ugc"
-            >
-              Privacy
-            </a>
-          </nav>
+        <footer className="container mx-auto grid grid-cols-1 gap-12 p-10 px-4 md:grid-cols-2 lg:grid-cols-3">
+          <div className="space-y-4">
+            <div className="space-y-4">
+              <Link href="#" className="flex items-center" prefetch={false}>
+                <span className="ml-2 text-xl font-bold">Acme Inc</span>
+              </Link>
+              <p>123 Main St, Anytown USA</p>
+              <p>&copy; 2024 Acme Inc. All rights reserved.</p>
+            </div>
+          </div>
+          <div className="">
+            <h3 className="text-lg font-semibold">Contact Us</h3>
+            <form className="space-y-4">
+              <Input placeholder="Name" />
+              <Input type="email" placeholder="Email" />
+              <Textarea placeholder="Message" className="min-h-[100px]" />
+              <Button type="submit">Submit</Button>
+            </form>
+          </div>
+          <div className="space-y-4">
+            <div className="space-y-4">
+              <h3 className="text-lg font-semibold">Quick Links</h3>
+              <div className="grid gap-2">
+                <Link href="#" className="hover:underline" prefetch={false}>
+                  Meet the Team
+                </Link>
+                <Link href="#" className="hover:underline" prefetch={false}>
+                  LinkedIn
+                </Link>
+              </div>
+            </div>
+          </div>
         </footer>
       </div>
     </div>

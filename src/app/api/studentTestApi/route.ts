@@ -26,8 +26,6 @@ export async function GET(request: Request): Promise<Response> {
 
     try {
         const prisma = new PrismaClient()
-
-
         const test = await prisma.test.findMany({
             where: {
                 studentId: Number(decoded.userId)
