@@ -1,8 +1,10 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { useEffect } from "react";
+import { AnimatedLineGrid } from "~/components/animated-line-grid";
 import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar";
 import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
@@ -23,6 +25,7 @@ export default function App() {
     <div className="min-h-[100dvh]">
       <div className="flex flex-col place-content-center">
         <header className="flex h-14 items-center px-4 lg:px-6">
+          <AnimatedLineGrid />
           <Link className="flex items-center justify-center" href="#" rel="ugc">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -88,7 +91,7 @@ export default function App() {
         <main className="flex-1">
           <section className="w-full py-12 md:py-24 lg:py-32 xl:py-48">
             <div className="container px-4 md:px-6">
-              <div className="flex flex-col items-center space-y-4 text-center">
+              <div className="grid grid-cols-1 place-items-center gap-12 space-y-4 text-center md:grid-cols-2 md:text-start">
                 <div className="space-y-2">
                   <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl/none">
                     Sorting the Mess in Life
@@ -97,14 +100,15 @@ export default function App() {
                     Get real-time updates, detailed performance analysis, and
                     personalized feedback to help you succeed.
                   </p>
+                  <a
+                    className="inline-flex h-9 items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
+                    href="#"
+                    rel="ugc"
+                  >
+                    View Gradebook
+                  </a>
                 </div>
-                <a
-                  className="inline-flex h-9 items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
-                  href="#"
-                  rel="ugc"
-                >
-                  View Gradebook
-                </a>
+                <Image src="/Mess.png" alt="logo" width={450} height={450} />
               </div>
             </div>
           </section>
@@ -308,7 +312,7 @@ export default function App() {
           <div className="space-y-4">
             <div className="space-y-4">
               <Link href="#" className="flex items-center" prefetch={false}>
-                <span className="ml-2 text-xl font-bold">Acme Inc</span>
+                <span className="ml-2 text-xl font-bold">TheMessCompany</span>
               </Link>
               <p>123 Main St, Anytown USA</p>
               <p>&copy; 2024 Acme Inc. All rights reserved.</p>
