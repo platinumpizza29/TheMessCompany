@@ -32,34 +32,6 @@ export default function App() {
           <nav className="ml-auto flex gap-4 sm:gap-6">
             <Link
               className="text-sm font-medium underline-offset-4 hover:underline"
-              href="#"
-              rel="ugc"
-            >
-              Features
-            </Link>
-            <Link
-              className="text-sm font-medium underline-offset-4 hover:underline"
-              href="#"
-              rel="ugc"
-            >
-              Testimonials
-            </Link>
-            <Link
-              className="text-sm font-medium underline-offset-4 hover:underline"
-              href="#"
-              rel="ugc"
-            >
-              About
-            </Link>
-            <Link
-              className="text-sm font-medium underline-offset-4 hover:underline"
-              href="#"
-              rel="ugc"
-            >
-              Contact
-            </Link>
-            <Link
-              className="text-sm font-medium underline-offset-4 hover:underline"
               href="/auth/signin"
               rel="ugc"
             >
