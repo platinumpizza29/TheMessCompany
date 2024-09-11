@@ -22,26 +22,12 @@ export default function App() {
   }, []);
 
   return (
-    <div className="min-h-[100dvh]">
+    <div className="font-inter min-h-[100dvh]">
       <div className="flex flex-col place-content-center">
         <header className="flex h-14 items-center px-4 lg:px-6">
           <AnimatedLineGrid />
           <Link className="flex items-center justify-center" href="#" rel="ugc">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              className="h-6 w-6"
-            >
-              <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path>
-            </svg>
-            <span className="sr-only">Gradebook</span>
+            <h2 className="text-2xl font-bold tracking-wide">TheMessCompany</h2>
           </Link>
           <nav className="ml-auto flex gap-4 sm:gap-6">
             <Link
