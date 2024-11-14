@@ -22,7 +22,6 @@ export default function SignUpPage() {
         name: name,
         email: email,
         password: password,
-        emailVerified: true,
       });
 
       const responseData = response.data as RegisterUserResponse;
