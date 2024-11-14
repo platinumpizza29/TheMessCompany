@@ -32,6 +32,13 @@ export default function App() {
           <nav className="ml-auto flex gap-4 sm:gap-6">
             <Link
               className="text-sm font-medium underline-offset-4 hover:underline"
+              href="/sponsor"
+              rel="ugc"
+            >
+              Our Sponsors
+            </Link>
+            <Link
+              className="text-sm font-medium underline-offset-4 hover:underline"
               href="/auth/signin"
               rel="ugc"
             >
