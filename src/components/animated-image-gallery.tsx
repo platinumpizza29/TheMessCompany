@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import Image from "next/image";
-import { Dialog, DialogContent } from "~/components/ui/dialog";
+import { useState } from "react";
 import {
   Carousel,
   CarouselContent,
@@ -10,7 +10,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "~/components/ui/carousel";
-import { motion, AnimatePresence } from "framer-motion";
+import { Dialog, DialogContent } from "~/components/ui/dialog";
 
 // Sample image data - replace with your actual image data
 const images = [
@@ -22,9 +22,15 @@ const images = [
   { id: 6, src: "/photo1.jpg", alt: "Image 6" },
 ];
 
+interface ImageType {
+  id: number;
+  src: string;
+  alt: string;
+}
+
 export function AnimatedImageGallery() {
-  const [selectedImage, setSelectedImage] = useState(null);
-  const [hoveredImage, setHoveredImage] = useState(null);
+  const [selectedImage, setSelectedImage] = useState<ImageType | null>(null);
+  const [hoveredImage, setHoveredImage] = useState<ImageType | null>(null);
 
   return (
     <div className="container mx-auto p-4">
